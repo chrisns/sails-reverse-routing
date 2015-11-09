@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+  - 0.12.0
+  - 4.1.1
+  - stable
+after_success:
+  - npm run coveralls
+before_deploy:
+  - npm --no-git-tag-version version 1.0.$TRAVIS_BUILD_NUMBER
+deploy:
+  provider: npm
+  email: chris@cns.me.uk
+  api_key:
+    secure: jGYfchYpnNQdR4yutKpAB+MBo2+6vXkYnkROpWix0Av3RZY0V2ZaGwZ5kwVCaBwjS65SWLW0xwoRflSNkBLidFqW52pgcCYvF1mQF8HonQpS8jnchaGIEwhrRgLR6khj6V4lp1i5/iDLCGyfcOKR+l5NTj826bx2qa1XvDJJ0g6SJ4PUypkBeFYv/29jCeHn+2u3OreGdQXscMtDC7LPWlvb7hgvBKpatQACnF1J7+oqyKOSEPx2gQq6WcywUSqHipMUtNfnZaCIqQG4SLNUMtVnO5xO3W9AH3wRuZ/cunMeVCx2nGuTq2qBNERe4ny7+MBln1n/7cPZL7XpR1LGkqKjYQA2yuYL12AtEjdRICvVZGye23TCXvzs6PqhXz5sY13VJ1sb7jEVU8JHgghGUUpHiHtOf3eeLOXOdmJh3il8af+TKtIN/fUgMH/MU17cJ/L30Bx7ZoHE0v+1NNbadgz2cEviOOEKHHmfrE8x2NXT8MQDPz6UBsNHzvwhUw/QKEWZlw81fBTFyD/QhNhxpFA/wJ3QJH0sMFCQ4eJUQLxOZdu6gwCUv72I6dgSuN8mQarzz3ORIsYfscM0bB4zbBObMcVJBm18fJz3B3KB7SiQhuZZT96QyVlls1g5w9nweTdN+baML5MforlOYU7mC7+mtF/P5nL5AQvhCHFsICk=
+  skip_cleanup: true
+  on:
+    branch: master
+    node_js: stable
