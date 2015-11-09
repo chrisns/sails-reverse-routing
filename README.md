@@ -15,18 +15,8 @@ $ npm install sails-reverse-routing
 
 ## Usage
 
-#### Configure Strategy
-
 ```js
-passport.use(new POISEStrategy(
-  function(userid, done) {
-    User.findOne({ userid: userid }, function (err, user) {
-      if (err) { return done(err); }
-      if (!user) { return done(null, false); }
-      return done(null, user);
-    });
-  }
-));
+
 ```
 
 ## Tests
