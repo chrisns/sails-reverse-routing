@@ -1,9 +1,9 @@
 {
   "name": "sails-reverse-routing",
   "version": "1.0.0",
-  "description": "Reversable router for sails.",
+  "description": "Reversible router for sails.",
   "keywords": [
-    "reversable",
+    "reversible",
     "sails"
   ],
   "author": [
@@ -24,13 +24,25 @@
     "url": "http://github.com/chrisns/sails-reverse-routing/issues"
   },
   "license": "GPL-2.0",
+  "sails": {
+    "isHook": true
+  },
   "main": "./lib",
+  "dependencies": {
+    "lodash": "^3.10.1"
+  },
   "devDependencies": {
     "chai": "1.x.x",
     "coveralls": "^2.11.4",
     "istanbul": "^0.4.0",
     "mocha": "1.x.x",
-    "mocha-lcov-reporter": "^1.0.0"
+    "mocha-lcov-reporter": "^1.0.0",
+    "rewire": "2.4.0",
+    "sails-util": "0.10.6",
+    "sinon": "1.17.2",
+    "sinon-as-promised": "4.0.0",
+    "sinon-chai": "2.8.0",
+    "sails": "0.11.2"
   },
   "engines": {
     "node": ">= 0.4.0"
