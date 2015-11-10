@@ -14,10 +14,14 @@ $ npm install sails-reverse-routing
 ```
 
 ## Usage
-
+Call reverseRouteService() anywhere like so:
 ```js
-
+   var arguments = [arg1, arg2];
+   var components =  { controller: "someController.someMethod", args: arguments };
+   var absoluteUrl = true;
+   var link = reverseRouteService(components, absoluteUrl);
 ```
+Set absoluteUrl to false to get a relative URI. The return value is an object with a 'uri' and a 'verb' property.
 
 ## Tests
 
