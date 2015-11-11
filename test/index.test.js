@@ -37,6 +37,35 @@ describe('UNIT sails-reverse-routing', () => {
       expect(sailsMock.reverseRoutes).to.eql({'foo.bar': {path: 'path', verb: 'world'}}));
   });
 
+  describe('run reverseRoute', () => {
+    var baseUrl = 'http://foo.com';
+    before(() => {
+      sailsMock.reverseRoutes = {
+        'abc.def': {path: 'abc/:arg1/def/:arg2/something', verb: 'post'},
+        'ghi.jkl': {path: '//foo///bar', verb: 'put'}
+      };
+      sailsMock.getBaseUrl = sinon.stub().returns(baseUrl);
+    });
+    it('should return the baseurl if controller undefined.', () => {
+      expect(reverseRoutes.reverseRoute({controller: 'donot.exist', args: ['a1', 'a2']}, true)).to.eql({
+        uri: baseUrl,
+        verb: 'GET'
+      });
+    });
+    it('should strip of spurious slashes', () => {
+      expect(reverseRoutes.reverseRoute({controller: 'ghi.jkl', args: []}, false)).to.eql({
+        uri: '/foo/bar',
+        verb: 'put'
+      });
+    });
+    it('should interpolate arguments into the path', () => {
+      expect(reverseRoutes.reverseRoute({controller: 'abc.def', args: ['a1', 'a2']}, false)).to.eql({
+        uri: '/abc/a1/def/a2/something',
+        verb: 'post'
+      });
+    })
+  });
+
 });
 
 describe('INTEGRATION sails-reverse-routing', () => {
