@@ -34,35 +34,29 @@ describe('UNIT sails-reverse-routing', () => {
       expect(detectVerbStub).to.be.calledWith('helo');
     });
     it('should populate reverseroutes with the expected content', () =>
-      expect(sailsMock.reverseRoutes).to.eql({'foo.bar': {path: 'path', verb: 'world'}}));
+      expect(sailsMock.reverseRoutes).to.eql({'foo.bar': 'path'}));
   });
 
   describe('run reverseRoute', () => {
     var baseUrl = 'http://foo.com';
     before(() => {
       sailsMock.reverseRoutes = {
-        'abc.def': {path: 'abc/:arg1/def/:arg2/something', verb: 'post'},
-        'ghi.jkl': {path: '//foo///bar', verb: 'put'}
+        'abc.def': 'abc/:arg1/def/:arg2/something',
+        'ghi.jkl': '//foo///bar'
       };
       sailsMock.getBaseUrl = sinon.stub().returns(baseUrl);
     });
     it('should return the baseurl if controller undefined.', () => {
-      expect(reverseRoutes.reverseRoute({controller: 'donot.exist', args: ['a1', 'a2']}, true)).to.eql({
-        uri: baseUrl,
-        verb: 'GET'
-      });
+      expect(reverseRoutes.reverseRoute({controller: 'donot.exist', args: ['a1', 'a2']}, true)).to.eql(baseUrl);
     });
     it('should strip of spurious slashes', () => {
-      expect(reverseRoutes.reverseRoute({controller: 'ghi.jkl', args: []}, false)).to.eql({
-        uri: '/foo/bar',
-        verb: 'put'
-      });
+      expect(reverseRoutes.reverseRoute({controller: 'ghi.jkl', args: []}, false)).to.equal('/foo/bar');
     });
     it('should interpolate arguments into the path', () => {
-      expect(reverseRoutes.reverseRoute({controller: 'abc.def', args: ['a1', 'a2']}, false)).to.eql({
-        uri: '/abc/a1/def/a2/something',
-        verb: 'post'
-      });
+      expect(reverseRoutes.reverseRoute({
+        controller: 'abc.def',
+        args: ['a1', 'a2']
+      }, false)).to.equal('/abc/a1/def/a2/something');
     })
   });
 
@@ -83,7 +77,7 @@ describe('INTEGRATION sails-reverse-routing', () => {
       },
       getBaseUrl: sinon.stub().returns('fo'),
       reverseRoutes: {
-        'centre.destroy': {path: 'centre/1', verb: 'delete'}
+        'centre.destroy': 'centre/1'
       }
     };
     reverseRoutes = hook(sailsMock);
@@ -92,11 +86,11 @@ describe('INTEGRATION sails-reverse-routing', () => {
   });
 
   it('Should return an absolute URL when absolute = TRUE', () =>
-      expect(reverseRouteService(comps, true)).to.eql({uri: 'fo/centre/1', verb: 'delete'})
+      expect(reverseRouteService(comps, true)).to.equal('fo/centre/1')
   );
 
   it('Should return a relative URL when absolute = false', () =>
-      expect(reverseRouteService(comps, false)).to.eql({uri: '/centre/1', verb: 'delete'})
+      expect(reverseRouteService(comps, false)).to.equal('/centre/1')
   );
 
 });
