@@ -1,5 +1,7 @@
 # sails-reverse-routing
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/chrisns/sails-reverse-routing.svg)](https://greenkeeper.io/)
+
 [![Build](https://travis-ci.org/chrisns/sails-reverse-routing.png)](https://travis-ci.org/chrisns/sails-reverse-routing)
 [![Coverage](https://coveralls.io/repos/chrisns/sails-reverse-routing/badge.png)](https://coveralls.io/r/chrisns/sails-reverse-routing)
 [![Quality](https://codeclimate.com/github/chrisns/sails-reverse-routing.png)](https://codeclimate.com/github/chrisns/sails-reverse-routing)
